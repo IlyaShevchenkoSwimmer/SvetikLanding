@@ -1,0 +1,27 @@
+$backgroundWidth: 140vw;
+$backgroundHeight: 140vh;
+
+.background {
+  width: $backgroundWidth;
+  height: $backgroundHeight;
+  position: relative;
+  top: -20vh;
+  left: -20vw;
+  perspective: 1000px;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__shadow {
+    position: absolute;
+    width: $backgroundWidth;
+    height: $backgroundHeight;
+    top: 0;
+    left: 0;
+    background: black;
+    transition: background 0.3s ease-in-out;
+  }
+}
