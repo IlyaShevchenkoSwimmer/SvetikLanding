@@ -1,0 +1,10 @@
+.infoSlider {
+  position: absolute;
+  height: 30vh;
+  width: 30vw;
+  outline: 1px solid red;
+
+  @media (max-width: 425px) {
+    width: 50vw;
+  }
+}

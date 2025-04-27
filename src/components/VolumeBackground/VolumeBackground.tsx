@@ -1,7 +1,11 @@
 import { useRef } from "react";
 import styles from "./styles.module.scss";
 
-export default function VolumeBackground() {
+interface VolumeBackgroundProps {
+  imgSrc: string;
+}
+
+export default function VolumeBackground({ imgSrc }: VolumeBackgroundProps) {
   const backgroundRef = useRef(null);
   const backgroundShadowRef = useRef(null);
 
@@ -13,8 +17,8 @@ export default function VolumeBackground() {
     const halfBodyHeight = document.body.offsetHeight / 2;
     const xPosition = event.clientX;
     const yPosition = event.clientY;
-    const xAngle = Math.floor((xPosition - halfBodyWidth) / 20);
-    const yAngle = Math.floor((yPosition - halfBodyHeight) / 20);
+    const xAngle = Math.floor((xPosition - halfBodyWidth) / 30);
+    const yAngle = Math.floor((yPosition - halfBodyHeight) / 30);
     const xShadow = Math.floor((xPosition / (halfBodyWidth * 2)) * 100);
     const yShadow = Math.floor((yPosition / (halfBodyHeight * 2)) * 100);
     background.style.transform = `rotateX(${-yAngle}deg) rotateY(${xAngle}deg)`;
@@ -27,7 +31,7 @@ export default function VolumeBackground() {
       onPointerMove={handlePointerMove}
       ref={backgroundRef}
     >
-      <img src="/VolumeBackground.jpg" />
+      <img src={imgSrc} />
       <div
         className={styles.background__shadow}
         ref={backgroundShadowRef}
