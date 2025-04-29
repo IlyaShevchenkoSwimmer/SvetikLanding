@@ -41,43 +41,30 @@ export default function InfoSlider() {
     const backgroundLeft = background.offsetLeft;
     const sliderItems = sliderItemsRef.current as unknown as HTMLElement;
     const sliderItemsLeft = sliderItems.offsetLeft;
-    const difference = scrolledBy % slider.offsetWidth;
-    const passedCenter =
-      Math.abs(difference) > slider.offsetWidth / 2 ? true : false;
+    const difference = scrolledBy / slider.offsetWidth;
+    const passedCenter = Math.abs(difference) > 1.2 ? true : false;
     background.style.transition = `all 0.3s ease-out`;
     sliderItems.style.transition = `all 0.3s ease-out`;
 
     background.style.left = `${
       passedCenter
         ? difference > 0
-          ? backgroundLeft - (slider.offsetWidth - Math.abs(difference))
-          : backgroundLeft + (slider.offsetWidth - Math.abs(difference))
-        : backgroundLeft + difference
+          ? backgroundLeft - (2 - Math.abs(difference)) * slider.offsetWidth
+          : backgroundLeft + (2 - Math.abs(difference)) * slider.offsetWidth
+        : backgroundLeft + scrolledBy
     }px`;
 
     sliderItems.style.left = `${
       passedCenter
         ? difference < 0
-          ? sliderItemsLeft - (slider.offsetWidth - Math.abs(difference))
-          : sliderItemsLeft + (slider.offsetWidth - Math.abs(difference))
-        : sliderItemsLeft - difference
+          ? sliderItemsLeft - (2 - Math.abs(difference)) * slider.offsetWidth
+          : sliderItemsLeft + (2 - Math.abs(difference)) * slider.offsetWidth
+        : sliderItemsLeft - scrolledBy
     }px`;
-
-    if (background.offsetLeft > 0) {
-      background.style.left = "0";
-    }
-
-    if (
-      background.offsetLeft <
-      -((background.children.length - 1) * slider.offsetWidth)
-    ) {
-      background.style.left = `-${
-        (background.children.length - 1) * slider.offsetWidth
-      }px`;
-    }
 
     if (sliderItems.offsetLeft > 0) {
       sliderItems.style.left = "0";
+      background.style.left = `-${(background.children.length - 3) * 100}%`;
     }
 
     if (
@@ -87,6 +74,7 @@ export default function InfoSlider() {
       sliderItems.style.left = `-${
         (sliderItems.children.length * 2 - 2) * slider.offsetWidth
       }px`;
+      background.style.left = "-200%";
     }
 
     document.body.onpointermove = null;

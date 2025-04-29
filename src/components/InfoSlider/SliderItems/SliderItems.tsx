@@ -11,9 +11,6 @@ export default function SliderItems({ ref }: SliderItemsProps) {
     <section className={styles.sliderItems} ref={ref}>
       <SliderItem />
       <SliderItem />
-      <SliderItem />
-      <SliderItem />
-      <SliderItem />
     </section>
   );
 }
